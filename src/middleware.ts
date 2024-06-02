@@ -3,7 +3,7 @@ import { createRouteMatcher } from '@clerk/nextjs/server';
 
 // Define public routes that don't require authentication
 const privateRoutes = createRouteMatcher([
-  '/', 
+  '/','/agency' 
 ]);
 
 //public routes /site /api/uploadthing
