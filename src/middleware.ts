@@ -29,11 +29,11 @@ export default clerkMiddleware((auth, req) => {
       ?.split(`${process.env.NEXT_PUBLIC_DOMAIN}`)
       .filter(Boolean)[0]
 
-    if (customSubDomain) {
-      return NextResponse.rewrite(
-        new URL(`/${customSubDomain}${pathWithSearchParams}`, req.url)
-      )
-    }
+    // if (customSubDomain) {
+    //   return NextResponse.rewrite(
+    //     new URL(`/${customSubDomain}${pathWithSearchParams}`, req.url)
+    //   )
+    // }
 
   // if (privateRoutes(req)) {
   //   auth().protect();
