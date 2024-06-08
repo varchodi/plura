@@ -4,4 +4,6 @@ declare global{
 }
 
 //Prisma client ?? to prevent from creating multiple clients
-export const db = global.prisma || PrismaClient();
+export const db = globalThis.prisma || PrismaClient();
+
+if (process.env.NODE_ENV !== "production") globalThis.prisma = db;
