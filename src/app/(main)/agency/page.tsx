@@ -4,10 +4,8 @@ import { redirect } from 'next/navigation';
 import React from 'react'
 
 const Page = async() => {
-  const authAuser = await currentUser();
-  if (!authAuser) redirect('/sign-in');
   const agencyId = await verifyAndAcceptInvitation();
-
+  console.log(`agency: ${agencyId}`);
   //get user details (with server actions /??)
   const user = await getAuthUserDetails();
   return (
