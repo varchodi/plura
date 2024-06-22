@@ -196,7 +196,7 @@ const AgencyDetails = ({ data }: Props) => {
                 )}
               />
 
-<div className="flex md:flex-row gap-4">
+                <div className="flex md:flex-row gap-4">
                 <FormField
                   disabled={isLoading}
                   control={form.control}
@@ -249,7 +249,33 @@ const AgencyDetails = ({ data }: Props) => {
                   )}
                 />
               </div>
+              <FormField
+                disabled={isLoading}
+                control={form.control}
+                name="country"
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel>Country</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Country"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
+              {
+                 <div className="flex flex-col gap-2">
+                  <FormLabel>Create A Goal</FormLabel>
+                  <FormDescription>
+                  ✨ Create a goal for your agency. As your business grows
+                  your goals grow too so dont forget to set the bar higher!
+                  </FormDescription>
+                </div>
+              }
               
             </form>
           </Form>
