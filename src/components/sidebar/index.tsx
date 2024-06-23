@@ -1,5 +1,6 @@
 import { getAuthUserDetails } from '@/lib/queries'
 import React from 'react'
+import MenuOptions from './menu-options'
 
 type Props = {
     id: string,
@@ -27,9 +28,10 @@ const Sidebar = async ({ id, type }: Props) => {
 
     const subaccounts = user.Agency.SubAccount.filter((subacc)=>user.Permissions.find(permission=>permission.subAccountId===subacc.id && permission.access))
   return (
-    <div>
-      Sidebar
-    </div>
+    <>
+          <MenuOptions />
+          <MenuOptions/>
+    </>
   )
 }
 
