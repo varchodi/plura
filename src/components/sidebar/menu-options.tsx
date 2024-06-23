@@ -3,10 +3,12 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { AgencySidebarOption, SubAccount, SubAccountSidebarOption, User } from '@prisma/client';
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 import { Button } from '../ui/button';
-import { Menu } from 'lucide-react';
+import { ChevronsUpDown, Compass, Menu } from 'lucide-react';
 import clsx from 'clsx';
 import { AspectRatio } from '../ui/aspect-ratio';
 import Image from 'next/image';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { Command, CommandEmpty, CommandInput, CommandList } from '../ui/command';
 
 type Props = {
     defaultOpen?: boolean;
@@ -17,7 +19,7 @@ type Props = {
     user:User| any;
     id: string;
 }
-const MenuOptions = ({ defaultOpen, subAccounts, sidebarOpt, sidebarLogo, user, id }: Props) => {
+const MenuOptions = ({ defaultOpen, subAccounts, sidebarOpt, sidebarLogo,details, user, id }: Props) => {
     const [isMounted, setIsMounted] = useState(false);
 
     const openState = useMemo(() => {
@@ -41,6 +43,37 @@ const MenuOptions = ({ defaultOpen, subAccounts, sidebarOpt, sidebarLogo, user, 
             <AspectRatio ratio={16/5}>
                 <Image src={sidebarLogo} alt='Sidebar Logo' fill className='rounded-md object-contain'/>
             </AspectRatio>
+            <Popover>
+                <PopoverTrigger asChild>
+                    <Button className='w-full my-4 flex items-center justify-between py-8'
+                    variant={'ghost'}
+                    >
+                        <div className="flex items-center text-left gap-2">
+                            <Compass />
+                            <div className="flex flex-col">
+                                {details.name}
+                                      <span className='text-muted-foreground'>{details.address}</span>
+                            </div>
+                            </div>
+                            <div className="">
+                                <ChevronsUpDown className='text-muted-foreground' size={16}/>
+                            </div>
+                    </Button>
+                </PopoverTrigger>
+                <PopoverContent className='w-80 h-80 mt-4 z-[200]'>
+                    {
+                        <Command className='rounded-lg'>
+                            <CommandInput placeholder='Search account ...'/>
+                            <CommandList  className='pb-16'>
+                                <CommandEmpty>No Results foun</CommandEmpty>
+                                {
+                                    (user?.role === 'AGENCY_OWNER' || user?.role === "AGENCY_ADMIN") && user?.agency && <div></div>
+                                }
+                            </CommandList>
+                        </Command>
+                    }
+                </PopoverContent>
+            </Popover>
         </div>
       </SheetContent>
     </Sheet>
