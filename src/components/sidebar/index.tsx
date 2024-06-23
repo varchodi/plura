@@ -24,13 +24,28 @@ const Sidebar = async ({ id, type }: Props) => {
         }
     }
 
-    const disebarOpt = type === 'agency' ? user.Agency.SidebarOption || [] : user.Agency.SubAccount.find((subacc) => subacc.id === id)?.SidebarOption || [];
+    const sidebarOpt = type === 'agency' ? user.Agency.SidebarOption || [] : user.Agency.SubAccount.find((subacc) => subacc.id === id)?.SidebarOption || [];
 
     const subaccounts = user.Agency.SubAccount.filter((subacc)=>user.Permissions.find(permission=>permission.subAccountId===subacc.id && permission.access))
   return (
     <>
-          <MenuOptions />
-          <MenuOptions/>
+          <MenuOptions
+              defaultOpen={true}
+              details={details}
+              id={id}
+              subAccounts={subaccounts}
+              sidebarLogo={sideBarLogo}
+              sidebarOpt={sidebarOpt}
+              user={user}
+          />
+          <MenuOptions
+               details={details}
+              id={id}
+              subAccounts={subaccounts}
+               sidebarLogo={sideBarLogo}
+               sidebarOpt={sidebarOpt}
+               user={user}
+          />
     </>
   )
 }
