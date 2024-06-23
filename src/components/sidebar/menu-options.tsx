@@ -4,6 +4,10 @@ import { AgencySidebarOption, SubAccount, SubAccountSidebarOption, User } from '
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 import { Button } from '../ui/button';
 import { Menu } from 'lucide-react';
+import clsx from 'clsx';
+import { AspectRatio } from '../ui/aspect-ratio';
+import Image from 'next/image';
+
 type Props = {
     defaultOpen?: boolean;
     subAccounts: SubAccount[];
@@ -30,10 +34,14 @@ const MenuOptions = ({ defaultOpen, subAccounts, sidebarOpt, sidebarLogo, user, 
         <Button variant='outline' size={'icon'}>
             <Menu/>
         </Button>
-          </SheetTrigger>
+        </SheetTrigger>
           
-      <SheetContent >
-        
+      <SheetContent  showX={!defaultOpen} side={'left'} className={clsx("bg-background/80 backdrop-blur-xl fixed top-0 border-red-[1px] p-6 ",{"hidden md:inline-block z-0 w-[300px]":defaultOpen,'inline-block md:hidden z-[100] w-full':!defaultOpen})}>
+        <div className="">
+            <AspectRatio ratio={16/5}>
+                <Image src={sidebarLogo} alt='Sidebar Logo' fill className='rounded-md object-contain'/>
+            </AspectRatio>
+        </div>
       </SheetContent>
     </Sheet>
   )
